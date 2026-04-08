@@ -58,7 +58,8 @@ class CharadesApp extends StatelessWidget {
 //   - Tempo antes de começar (3s default; 5s; 10s) 
 //   - Tempo de jogo (30s default; 60s; 120s; 180s)
 // Exportar e importar highscore (json)
-// Pausa durante o jogo
+// Pausa durante o jogo (opções: retomar, home, reiniciar -> dá shuffle 
+//  às palavras outra vez)
 // Ecrã de resultados (jogo fast ou entre jogadores) mostra 
 //  palavras acertadas e erradas
 //   - Jogo fast: Botão de reiniciar ou ir para o home screen
@@ -66,3 +67,11 @@ class CharadesApp extends StatelessWidget {
 //      e botão terminar / ir para o home screen
 //   - Highscore permite ver em mais detalhe as palavras acertadas e 
 //      erradas (organizadas por categoria)
+// 
+// Versões diferentes de mobile para desktop
+// - Desktop: big green button on the right and big red button on the left
+// - Mobile: tilt down to correct; tilt up to pass; 
+//    click right half of screen to correct; left half to pass 
+//    (algum tipo de indicação para carregar? muito subtil)
+
+// Ver exemplo app GuessUp, Charades (telemóvel Bia)
