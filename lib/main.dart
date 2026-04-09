@@ -1722,6 +1722,12 @@ class CharadesApp extends StatelessWidget {
 //      e botão terminar / ir para o home screen
 //   - Highscore permite ver em mais detalhe as palavras acertadas e 
 //      erradas (organizadas por categoria)
+// durante o jogo não bloquear o ecrã (ecrã sempre ativo)
+// para jogo de multi categoria, também mostrar a categoria (por 
+//  baixo da palavra), texo mais pequeno
+// portrait e landscape: jogo sempre em landscape (avisa utilizador 
+//  para meter em landscape); tudo o resto em portrait
+// não permitir que palavras partam de linha (reduzir tamanho do texto)
 // l10n
 // tests
 // multiple blocs?

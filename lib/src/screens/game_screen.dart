@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:vibration/vibration.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -25,8 +26,8 @@ class _GameScreenState extends State<GameScreen> {
   StreamSubscription? _accelerometerSubscription;
 
   bool _hasReturnedToNeutral = true;
-  static const double neutralThreshold = 2.0;
-  static const double tiltThreshold = 7.0;
+  static const double neutralThreshold = 1.5;
+  static const double tiltThreshold = 8.0;
 
   // 30 FPS is plenty for a smooth countdown without hogging CPU
   static const int tickRateMs = 33;
@@ -36,6 +37,9 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
+    // Keep the screen on while this screen is active
+    WakelockPlus.enable();
+
     // Start with the initial 3-2-1 countdown duration
     _totalDurationMs =
         context.read<GameBloc>().state.countdownTime.value * 1000;
@@ -179,6 +183,9 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   void dispose() {
+    // Release the lock so the phone can sleep normally again
+    WakelockPlus.disable();
+
     _timer?.cancel();
     _stopwatch.stop();
     _accelerometerSubscription?.cancel();
