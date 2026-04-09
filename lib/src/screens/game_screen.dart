@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:charades/src/bloc/game_bloc.dart';
 import 'package:charades/src/screens/score_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -13,52 +15,125 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   Timer? _timer;
-  late int _secondsRemaining;
-  bool _isStarting = true; // Flag for the initial "Get Ready" countdown
+  final Stopwatch _stopwatch = Stopwatch();
+
+  late int _totalDurationMs;
+  int _millisecondsRemaining = 0;
+  bool _isStarting = true;
+
+  StreamSubscription? _accelerometerSubscription;
+
+  bool _hasReturnedToNeutral = true;
+  static const double neutralThreshold = 2.0;
+  static const double tiltThreshold = 7.0;
+
+  // 30 FPS is plenty for a smooth countdown without hogging CPU
+  static const int tickRateMs = 33;
+
+  double latestZ = 0.0;
 
   @override
   void initState() {
     super.initState();
-    // Access .seconds from the enum
-    _secondsRemaining = context.read<GameBloc>().state.countdownTime.value;
-    _startInitialCountdown();
+    // Start with the initial 3-2-1 countdown duration
+    _totalDurationMs =
+        context.read<GameBloc>().state.countdownTime.value * 1000;
+    _millisecondsRemaining = _totalDurationMs;
+
+    if (_isMobile) {
+      _initSensors();
+    }
+
+    _startTimerLoop();
   }
 
-  /// Timer for the "3... 2... 1..." start sequence
-  void _startInitialCountdown() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_secondsRemaining > 1) {
-        setState(() {
-          _secondsRemaining--;
-        });
-      } else {
-        _timer?.cancel();
-        setState(() {
-          _isStarting = false;
-          // Switch to the game duration from settings (default 30s)
-          _secondsRemaining = context
-              .read<GameBloc>()
-              .state
-              .gameDuration
-              .value;
-        });
-        _startGameTimer();
+  bool get _isMobile =>
+      defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS;
+
+  bool get _isPositionValid => !_isMobile || latestZ.abs() <= neutralThreshold;
+
+  // Uses .ceil() so the user sees "1" until the very last millisecond hits 0
+  int get _secondsDisplay => (_millisecondsRemaining / 1000).ceil();
+
+  void _initSensors() {
+    _accelerometerSubscription = accelerometerEventStream().listen((event) {
+      setState(() {
+        latestZ = event.z;
+      });
+
+      if (_isStarting) return;
+
+      if (event.z.abs() <= neutralThreshold) {
+        _hasReturnedToNeutral = true;
+        return;
+      }
+
+      if (_hasReturnedToNeutral) {
+        if (event.z > tiltThreshold) {
+          _handleAnswer(false); // Pass
+        } else if (event.z < -tiltThreshold) {
+          _handleAnswer(true); // Correct
+        }
       }
     });
   }
 
-  /// Timer for the actual gameplay duration
-  void _startGameTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_secondsRemaining > 0) {
-        setState(() {
-          _secondsRemaining--;
-        });
+  void _startTimerLoop() {
+    _timer?.cancel();
+    _stopwatch.reset();
+    _stopwatch.start();
+
+    _timer = Timer.periodic(const Duration(milliseconds: tickRateMs), (timer) {
+      if (_isStarting) {
+        if (_isPositionValid) {
+          if (!_stopwatch.isRunning) _stopwatch.start();
+
+          _updateRemainingTime();
+
+          if (_millisecondsRemaining <= 0) {
+            _transitionToMainGame();
+          }
+        } else {
+          // Pause the clock if the user tilts the phone away during countdown
+          if (_stopwatch.isRunning) _stopwatch.stop();
+        }
       } else {
-        _timer?.cancel();
-        _navigateToScore();
+        // Active Game: Always running
+        _updateRemainingTime();
+
+        if (_millisecondsRemaining <= 0) {
+          _timer?.cancel();
+          _navigateToScore();
+        }
       }
     });
+  }
+
+  void _updateRemainingTime() {
+    setState(() {
+      _millisecondsRemaining =
+          _totalDurationMs - _stopwatch.elapsedMilliseconds;
+      if (_millisecondsRemaining < 0) _millisecondsRemaining = 0;
+    });
+  }
+
+  void _transitionToMainGame() {
+    setState(() {
+      _isStarting = false;
+      _totalDurationMs =
+          context.read<GameBloc>().state.gameDuration.value * 1000;
+      _millisecondsRemaining = _totalDurationMs;
+    });
+    _stopwatch.reset();
+    _stopwatch.start();
+  }
+
+  void _handleAnswer(bool isCorrect) {
+    if (_isStarting) return;
+
+    setState(() => _hasReturnedToNeutral = false);
+    context.read<GameBloc>().add(AnswerWord(isCorrect));
   }
 
   void _navigateToScore() {
@@ -73,19 +148,42 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    _stopwatch.stop();
+    _accelerometerSubscription?.cancel();
     super.dispose();
+  }
+
+  Widget _buildStartingUI() {
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: Center(
+        child: !_isPositionValid
+            ? const Text(
+                "Place phone upright to start",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              )
+            : Text(
+                "$_secondsDisplay",
+                style: const TextStyle(
+                  fontSize: 120,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_isStarting ? "Get Ready!" : "Game On!"),
-        automaticallyImplyLeading: false,
-      ),
       body: BlocConsumer<GameBloc, GameState>(
         listener: (context, state) {
-          // End game if words run out before the timer does
           if (state.currentWordIndex >= state.gameWords.length &&
               state.gameWords.isNotEmpty) {
             _timer?.cancel();
@@ -97,88 +195,108 @@ class _GameScreenState extends State<GameScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // Show the "Get Ready" overlay if the game hasn't started
           if (_isStarting) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            return _buildStartingUI();
+          }
+
+          return Stack(
+            children: [
+              Column(
                 children: [
-                  const Text("Starting in...", style: TextStyle(fontSize: 24)),
-                  Text(
-                    "$_secondsRemaining",
-                    style: const TextStyle(
-                      fontSize: 80,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: _GameActionButton(
+                      color: Colors.red.withOpacity(0.8),
+                      label: "PASS",
+                      labelPosition: Alignment.topCenter,
+                      onTap: () => _handleAnswer(false),
+                    ),
+                  ),
+                  Expanded(
+                    child: _GameActionButton(
+                      color: Colors.green.withOpacity(0.8),
+                      label: "CORRECT",
+                      labelPosition: Alignment.bottomCenter,
+                      onTap: () => _handleAnswer(true),
                     ),
                   ),
                 ],
               ),
-            );
-          }
-
-          // Main Game UI
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Countdown display
-                Text(
-                  "$_secondsRemaining",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: _secondsRemaining <= 5 ? Colors.red : Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Text(
-                  state.gameWords[state.currentWordIndex],
-                  style: const TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 60),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 15,
+              IgnorePointer(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$_secondsDisplay",
+                        style: const TextStyle(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(blurRadius: 10, color: Colors.black45),
+                          ],
                         ),
                       ),
-                      onPressed: () =>
-                          context.read<GameBloc>().add(const AnswerWord(false)),
-                      child: const Text(
-                        "Pass",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 15,
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          state.gameWords[state.currentWordIndex].toUpperCase(),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 80,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(blurRadius: 15, color: Colors.black54),
+                            ],
+                          ),
                         ),
                       ),
-                      onPressed: () =>
-                          context.read<GameBloc>().add(const AnswerWord(true)),
-                      child: const Text(
-                        "Correct!",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _GameActionButton extends StatelessWidget {
+  final Color color;
+  final String label;
+  final Alignment labelPosition;
+  final VoidCallback onTap;
+
+  const _GameActionButton({
+    required this.color,
+    required this.label,
+    required this.labelPosition,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: color,
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          alignment: labelPosition,
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Text(
+            label.toUpperCase(),
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+            ),
+          ),
+        ),
       ),
     );
   }
