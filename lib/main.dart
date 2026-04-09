@@ -1,4 +1,4 @@
-import 'package:charades/src/bloc/bloc/game_bloc.dart';
+import 'package:charades/src/bloc/game_bloc.dart';
 import 'package:charades/src/models/category.dart';
 import 'package:charades/src/screens/home_screen.dart';
 import 'package:flutter/material.dart';

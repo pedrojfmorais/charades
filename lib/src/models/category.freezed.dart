@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,195 +9,275 @@ part of 'category.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$Category {
-  String get name => throw _privateConstructorUsedError;
-  List<String> get words => throw _privateConstructorUsedError;
-  bool get isSelected => throw _privateConstructorUsedError;
 
-  /// Create a copy of Category
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CategoryCopyWith<Category> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get name; List<String> get words; bool get isSelected;
+/// Create a copy of Category
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CategoryCopyWith<Category> get copyWith => _$CategoryCopyWithImpl<Category>(this as Category, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.words, words)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(words),isSelected);
+
+@override
+String toString() {
+  return 'Category(name: $name, words: $words, isSelected: $isSelected)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $CategoryCopyWith<$Res> {
-  factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
-      _$CategoryCopyWithImpl<$Res, Category>;
-  @useResult
-  $Res call({String name, List<String> words, bool isSelected});
-}
+abstract mixin class $CategoryCopyWith<$Res>  {
+  factory $CategoryCopyWith(Category value, $Res Function(Category) _then) = _$CategoryCopyWithImpl;
+@useResult
+$Res call({
+ String name, List<String> words, bool isSelected
+});
 
+
+
+
+}
 /// @nodoc
-class _$CategoryCopyWithImpl<$Res, $Val extends Category>
+class _$CategoryCopyWithImpl<$Res>
     implements $CategoryCopyWith<$Res> {
-  _$CategoryCopyWithImpl(this._value, this._then);
+  _$CategoryCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Category _self;
+  final $Res Function(Category) _then;
 
-  /// Create a copy of Category
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? words = null,
-    Object? isSelected = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            words: null == words
-                ? _value.words
-                : words // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
-            isSelected: null == isSelected
-                ? _value.isSelected
-                : isSelected // ignore: cast_nullable_to_non_nullable
-                      as bool,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of Category
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? words = null,Object? isSelected = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,words: null == words ? _self.words : words // ignore: cast_nullable_to_non_nullable
+as List<String>,isSelected: null == isSelected ? _self.isSelected : isSelected // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Category].
+extension CategoryPatterns on Category {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Category value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Category() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Category value)  $default,){
+final _that = this;
+switch (_that) {
+case _Category():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Category value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Category() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  List<String> words,  bool isSelected)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Category() when $default != null:
+return $default(_that.name,_that.words,_that.isSelected);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  List<String> words,  bool isSelected)  $default,) {final _that = this;
+switch (_that) {
+case _Category():
+return $default(_that.name,_that.words,_that.isSelected);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  List<String> words,  bool isSelected)?  $default,) {final _that = this;
+switch (_that) {
+case _Category() when $default != null:
+return $default(_that.name,_that.words,_that.isSelected);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$CategoryImplCopyWith<$Res>
-    implements $CategoryCopyWith<$Res> {
-  factory _$$CategoryImplCopyWith(
-    _$CategoryImpl value,
-    $Res Function(_$CategoryImpl) then,
-  ) = __$$CategoryImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String name, List<String> words, bool isSelected});
+
+
+class _Category implements Category {
+  const _Category({required this.name, required final  List<String> words, this.isSelected = false}): _words = words;
+  
+
+@override final  String name;
+ final  List<String> _words;
+@override List<String> get words {
+  if (_words is EqualUnmodifiableListView) return _words;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_words);
+}
+
+@override@JsonKey() final  bool isSelected;
+
+/// Create a copy of Category
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CategoryCopyWith<_Category> get copyWith => __$CategoryCopyWithImpl<_Category>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._words, _words)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(_words),isSelected);
+
+@override
+String toString() {
+  return 'Category(name: $name, words: $words, isSelected: $isSelected)';
+}
+
+
 }
 
 /// @nodoc
-class __$$CategoryImplCopyWithImpl<$Res>
-    extends _$CategoryCopyWithImpl<$Res, _$CategoryImpl>
-    implements _$$CategoryImplCopyWith<$Res> {
-  __$$CategoryImplCopyWithImpl(
-    _$CategoryImpl _value,
-    $Res Function(_$CategoryImpl) _then,
-  ) : super(_value, _then);
+abstract mixin class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
+  factory _$CategoryCopyWith(_Category value, $Res Function(_Category) _then) = __$CategoryCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, List<String> words, bool isSelected
+});
 
-  /// Create a copy of Category
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = null,
-    Object? words = null,
-    Object? isSelected = null,
-  }) {
-    return _then(
-      _$CategoryImpl(
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        words: null == words
-            ? _value._words
-            : words // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
-        isSelected: null == isSelected
-            ? _value.isSelected
-            : isSelected // ignore: cast_nullable_to_non_nullable
-                  as bool,
-      ),
-    );
-  }
+
+
+
 }
-
 /// @nodoc
+class __$CategoryCopyWithImpl<$Res>
+    implements _$CategoryCopyWith<$Res> {
+  __$CategoryCopyWithImpl(this._self, this._then);
 
-class _$CategoryImpl implements _Category {
-  const _$CategoryImpl({
-    required this.name,
-    required final List<String> words,
-    this.isSelected = false,
-  }) : _words = words;
+  final _Category _self;
+  final $Res Function(_Category) _then;
 
-  @override
-  final String name;
-  final List<String> _words;
-  @override
-  List<String> get words {
-    if (_words is EqualUnmodifiableListView) return _words;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_words);
-  }
-
-  @override
-  @JsonKey()
-  final bool isSelected;
-
-  @override
-  String toString() {
-    return 'Category(name: $name, words: $words, isSelected: $isSelected)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CategoryImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._words, _words) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    name,
-    const DeepCollectionEquality().hash(_words),
-    isSelected,
-  );
-
-  /// Create a copy of Category
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>
-      __$$CategoryImplCopyWithImpl<_$CategoryImpl>(this, _$identity);
+/// Create a copy of Category
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? words = null,Object? isSelected = null,}) {
+  return _then(_Category(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,words: null == words ? _self._words : words // ignore: cast_nullable_to_non_nullable
+as List<String>,isSelected: null == isSelected ? _self.isSelected : isSelected // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-abstract class _Category implements Category {
-  const factory _Category({
-    required final String name,
-    required final List<String> words,
-    final bool isSelected,
-  }) = _$CategoryImpl;
 
-  @override
-  String get name;
-  @override
-  List<String> get words;
-  @override
-  bool get isSelected;
-
-  /// Create a copy of Category
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

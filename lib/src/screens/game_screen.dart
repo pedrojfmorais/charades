@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:charades/src/bloc/bloc/game_bloc.dart';
+import 'package:charades/src/bloc/game_bloc.dart';
 import 'package:charades/src/screens/score_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +19,8 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize with the countdown time from settings (default 3s)
-    _secondsRemaining = context.read<GameBloc>().state.countdownTime;
+    // Access .seconds from the enum
+    _secondsRemaining = context.read<GameBloc>().state.countdownTime.value;
     _startInitialCountdown();
   }
 
@@ -36,7 +36,11 @@ class _GameScreenState extends State<GameScreen> {
         setState(() {
           _isStarting = false;
           // Switch to the game duration from settings (default 30s)
-          _secondsRemaining = context.read<GameBloc>().state.gameDuration;
+          _secondsRemaining = context
+              .read<GameBloc>()
+              .state
+              .gameDuration
+              .value;
         });
         _startGameTimer();
       }

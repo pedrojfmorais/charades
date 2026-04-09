@@ -1,4 +1,6 @@
 import 'package:charades/src/models/category.dart';
+import 'package:charades/src/utils/enums/countdown_time.dart';
+import 'package:charades/src/utils/enums/game_duration.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -79,7 +81,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       emit(state.copyWith(highscores: currentScores));
     });
 
-    // Inside GameBloc constructor
     on<UpdateConfigs>((event, emit) {
       emit(
         state.copyWith(

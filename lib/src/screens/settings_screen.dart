@@ -1,5 +1,8 @@
-import 'package:charades/src/bloc/bloc/game_bloc.dart';
+import 'package:charades/src/bloc/game_bloc.dart';
 import 'package:charades/src/screens/game_screen.dart';
+import 'package:charades/src/utils/enums/countdown_time.dart';
+import 'package:charades/src/utils/enums/game_duration.dart';
+import 'package:charades/src/widgets/sliding_segmented_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,37 +16,60 @@ class SettingsScreen extends StatelessWidget {
       body: BlocBuilder<GameBloc, GameState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(24.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("Tempo antes de começar", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                _buildSegmentedControl<int>(
-                  values: [3, 5, 10],
-                  currentValue: state.countdownTime,
-                  onChanged: (val) => context.read<GameBloc>().add(UpdateConfigs(countdownTime: val)),
-                  labelSuffix: "s",
+                const Text(
+                  "Tempo antes de começar",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 30),
-                const Text("Tempo de jogo", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                _buildSegmentedControl<int>(
-                  values: [30, 60, 120, 180],
-                  currentValue: state.gameDuration,
-                  onChanged: (val) => context.read<GameBloc>().add(UpdateConfigs(gameDuration: val)),
-                  labelSuffix: "s",
+                const SizedBox(height: 16),
+                SlidingSegmentedButton<CountdownTime>(
+                  options: CountdownTime.values,
+                  selectedValue: state.countdownTime,
+                  labelBuilder: (value) => value.title,
+                  onValueChanged: (val) => context.read<GameBloc>().add(
+                    UpdateConfigs(countdownTime: val),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                const Text(
+                  "Tempo de jogo",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 16),
+                SlidingSegmentedButton<GameDuration>(
+                  options: GameDuration.values,
+                  selectedValue: state.gameDuration,
+                  labelBuilder: (value) => value.title,
+                  onValueChanged: (val) => context.read<GameBloc>().add(
+                    UpdateConfigs(gameDuration: val),
+                  ),
                 ),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,
+                  height: 56,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
                     onPressed: () {
                       context.read<GameBloc>().add(const StartPlaying());
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const GameScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const GameScreen(),
+                        ),
                       );
                     },
-                    child: const Text("Start Game"),
+                    child: const Text(
+                      "START GAME",
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ),
               ],
@@ -51,25 +77,6 @@ class SettingsScreen extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-
-  Widget _buildSegmentedControl<T>({
-    required List<T> values,
-    required T currentValue,
-    required ValueChanged<T> onChanged,
-    required String labelSuffix,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: values.map((val) {
-        final isSelected = val == currentValue;
-        return ChoiceChip(
-          label: Text("$val$labelSuffix"),
-          selected: isSelected,
-          onSelected: (_) => onChanged(val),
-        );
-      }).toList(),
     );
   }
 }

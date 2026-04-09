@@ -1,5 +1,5 @@
-abstract interface class GameSettings {
-  String get text;
-
-  int get inSeconds;
+abstract interface class GameSettings<T> {
+  String get title;
+  String get valueHasString;
+  T get value;
 }
