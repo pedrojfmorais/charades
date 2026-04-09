@@ -53,10 +53,6 @@ class CharadesApp extends StatelessWidget {
 // Adicionar vibração
 // Countdown 3s (default) antes de começar
 //   - Só começa se o telemóvel tiver direiro
-// Mostrar tempo que falta e palavra no ecrã de jogo
-// Depois de escolher as categorias passar para ecrã de configs
-//   - Tempo antes de começar (3s default; 5s; 10s) 
-//   - Tempo de jogo (30s default; 60s; 120s; 180s)
 // Exportar e importar highscore (json)
 // Pausa durante o jogo (opções: retomar, home, reiniciar -> dá shuffle 
 //  às palavras outra vez)

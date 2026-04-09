@@ -1,7 +1,7 @@
 part of 'game_bloc.dart';
 
 @freezed
-class GameState with _$GameState {
+sealed class GameState with _$GameState {
   const factory GameState({
     @Default([]) List<String> players,
     @Default([]) List<Category> categories,

@@ -6,8 +6,7 @@ enum GameDuration implements GameSettings<int> {
   twoMinutes,
   threeMinutes;
 
-  @override
-  String get title => 'Game Duration';
+  static String get title => 'Game Duration';
 
   @override
   String get valueHasString => '${value}s';

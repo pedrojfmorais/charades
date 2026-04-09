@@ -20,29 +20,29 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  "Tempo antes de começar",
+                Text(
+                  CountdownTime.title,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
                 SlidingSegmentedButton<CountdownTime>(
                   options: CountdownTime.values,
                   selectedValue: state.countdownTime,
-                  labelBuilder: (value) => value.title,
+                  labelBuilder: (value) => value.valueHasString,
                   onValueChanged: (val) => context.read<GameBloc>().add(
                     UpdateConfigs(countdownTime: val),
                   ),
                 ),
                 const SizedBox(height: 40),
-                const Text(
-                  "Tempo de jogo",
+                Text(
+                  GameDuration.title,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 16),
                 SlidingSegmentedButton<GameDuration>(
                   options: GameDuration.values,
                   selectedValue: state.gameDuration,
-                  labelBuilder: (value) => value.title,
+                  labelBuilder: (value) => value.valueHasString,
                   onValueChanged: (val) => context.read<GameBloc>().add(
                     UpdateConfigs(gameDuration: val),
                   ),

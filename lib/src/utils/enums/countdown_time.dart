@@ -5,8 +5,8 @@ enum CountdownTime implements GameSettings<int> {
   fiveSeconds,
   tenSeconds;
 
-  @override
-  String get title => 'Countdown Time';
+  
+  static String get title => 'Countdown Time';
 
   @override
   String get valueHasString => '${value}s';
