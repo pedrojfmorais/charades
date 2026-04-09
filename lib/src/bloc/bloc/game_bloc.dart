@@ -78,5 +78,15 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       await prefs.setStringList('highscores', currentScores);
       emit(state.copyWith(highscores: currentScores));
     });
+
+    // Inside GameBloc constructor
+    on<UpdateConfigs>((event, emit) {
+      emit(
+        state.copyWith(
+          countdownTime: event.countdownTime ?? state.countdownTime,
+          gameDuration: event.gameDuration ?? state.gameDuration,
+        ),
+      );
+    });
   }
 }

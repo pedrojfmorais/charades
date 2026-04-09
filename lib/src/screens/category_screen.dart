@@ -1,5 +1,5 @@
 import 'package:charades/src/bloc/bloc/game_bloc.dart';
-import 'package:charades/src/screens/game_screen.dart';
+import 'package:charades/src/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,14 +41,15 @@ class CategoryScreen extends StatelessWidget {
                     );
 
                     if (hasSelection) {
-                      context.read<GameBloc>().add(StartPlaying());
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GameScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsScreen(),
+                        ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Select at least one category!"),
                         ),
                       );

@@ -26,6 +26,8 @@ mixin _$GameEvent {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -36,6 +38,7 @@ mixin _$GameEvent {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -46,6 +49,7 @@ mixin _$GameEvent {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +61,7 @@ mixin _$GameEvent {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -67,6 +72,7 @@ mixin _$GameEvent {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -77,6 +83,7 @@ mixin _$GameEvent {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -184,6 +191,8 @@ class _$SavePlayersImpl implements SavePlayers {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return savePlayers(players);
   }
@@ -198,6 +207,7 @@ class _$SavePlayersImpl implements SavePlayers {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return savePlayers?.call(players);
   }
@@ -212,6 +222,7 @@ class _$SavePlayersImpl implements SavePlayers {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (savePlayers != null) {
@@ -230,6 +241,7 @@ class _$SavePlayersImpl implements SavePlayers {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return savePlayers(this);
   }
@@ -244,6 +256,7 @@ class _$SavePlayersImpl implements SavePlayers {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return savePlayers?.call(this);
   }
@@ -258,6 +271,7 @@ class _$SavePlayersImpl implements SavePlayers {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (savePlayers != null) {
@@ -367,6 +381,8 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return toggleCategory(index, isSelected);
   }
@@ -381,6 +397,7 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return toggleCategory?.call(index, isSelected);
   }
@@ -395,6 +412,7 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (toggleCategory != null) {
@@ -413,6 +431,7 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return toggleCategory(this);
   }
@@ -427,6 +446,7 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return toggleCategory?.call(this);
   }
@@ -441,6 +461,7 @@ class _$ToggleCategoryImpl implements ToggleCategory {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (toggleCategory != null) {
@@ -514,6 +535,8 @@ class _$StartPlayingImpl implements StartPlaying {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return startPlaying();
   }
@@ -528,6 +551,7 @@ class _$StartPlayingImpl implements StartPlaying {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return startPlaying?.call();
   }
@@ -542,6 +566,7 @@ class _$StartPlayingImpl implements StartPlaying {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (startPlaying != null) {
@@ -560,6 +585,7 @@ class _$StartPlayingImpl implements StartPlaying {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return startPlaying(this);
   }
@@ -574,6 +600,7 @@ class _$StartPlayingImpl implements StartPlaying {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return startPlaying?.call(this);
   }
@@ -588,6 +615,7 @@ class _$StartPlayingImpl implements StartPlaying {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (startPlaying != null) {
@@ -679,6 +707,8 @@ class _$AnswerWordImpl implements AnswerWord {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return answerWord(isCorrect);
   }
@@ -693,6 +723,7 @@ class _$AnswerWordImpl implements AnswerWord {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return answerWord?.call(isCorrect);
   }
@@ -707,6 +738,7 @@ class _$AnswerWordImpl implements AnswerWord {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (answerWord != null) {
@@ -725,6 +757,7 @@ class _$AnswerWordImpl implements AnswerWord {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return answerWord(this);
   }
@@ -739,6 +772,7 @@ class _$AnswerWordImpl implements AnswerWord {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return answerWord?.call(this);
   }
@@ -753,6 +787,7 @@ class _$AnswerWordImpl implements AnswerWord {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (answerWord != null) {
@@ -824,6 +859,8 @@ class _$ResetGameImpl implements ResetGame {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return resetGame();
   }
@@ -838,6 +875,7 @@ class _$ResetGameImpl implements ResetGame {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return resetGame?.call();
   }
@@ -852,6 +890,7 @@ class _$ResetGameImpl implements ResetGame {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (resetGame != null) {
@@ -870,6 +909,7 @@ class _$ResetGameImpl implements ResetGame {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return resetGame(this);
   }
@@ -884,6 +924,7 @@ class _$ResetGameImpl implements ResetGame {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return resetGame?.call(this);
   }
@@ -898,6 +939,7 @@ class _$ResetGameImpl implements ResetGame {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (resetGame != null) {
@@ -961,6 +1003,8 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return loadHighscores();
   }
@@ -975,6 +1019,7 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return loadHighscores?.call();
   }
@@ -989,6 +1034,7 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (loadHighscores != null) {
@@ -1007,6 +1053,7 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return loadHighscores(this);
   }
@@ -1021,6 +1068,7 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return loadHighscores?.call(this);
   }
@@ -1035,6 +1083,7 @@ class _$LoadHighscoresImpl implements LoadHighscores {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (loadHighscores != null) {
@@ -1098,6 +1147,8 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     required TResult Function() resetGame,
     required TResult Function() loadHighscores,
     required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
   }) {
     return saveCurrentScore();
   }
@@ -1112,6 +1163,7 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     TResult? Function()? resetGame,
     TResult? Function()? loadHighscores,
     TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
   }) {
     return saveCurrentScore?.call();
   }
@@ -1126,6 +1178,7 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     TResult Function()? resetGame,
     TResult Function()? loadHighscores,
     TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
     required TResult orElse(),
   }) {
     if (saveCurrentScore != null) {
@@ -1144,6 +1197,7 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     required TResult Function(ResetGame value) resetGame,
     required TResult Function(LoadHighscores value) loadHighscores,
     required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
   }) {
     return saveCurrentScore(this);
   }
@@ -1158,6 +1212,7 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     TResult? Function(ResetGame value)? resetGame,
     TResult? Function(LoadHighscores value)? loadHighscores,
     TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
   }) {
     return saveCurrentScore?.call(this);
   }
@@ -1172,6 +1227,7 @@ class _$SaveCurrentScoreImpl implements SaveCurrentScore {
     TResult Function(ResetGame value)? resetGame,
     TResult Function(LoadHighscores value)? loadHighscores,
     TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
     required TResult orElse(),
   }) {
     if (saveCurrentScore != null) {
@@ -1186,13 +1242,209 @@ abstract class SaveCurrentScore implements GameEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateConfigsImplCopyWith<$Res> {
+  factory _$$UpdateConfigsImplCopyWith(
+    _$UpdateConfigsImpl value,
+    $Res Function(_$UpdateConfigsImpl) then,
+  ) = __$$UpdateConfigsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? countdownTime, int? gameDuration});
+}
+
+/// @nodoc
+class __$$UpdateConfigsImplCopyWithImpl<$Res>
+    extends _$GameEventCopyWithImpl<$Res, _$UpdateConfigsImpl>
+    implements _$$UpdateConfigsImplCopyWith<$Res> {
+  __$$UpdateConfigsImplCopyWithImpl(
+    _$UpdateConfigsImpl _value,
+    $Res Function(_$UpdateConfigsImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of GameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? countdownTime = freezed, Object? gameDuration = freezed}) {
+    return _then(
+      _$UpdateConfigsImpl(
+        countdownTime: freezed == countdownTime
+            ? _value.countdownTime
+            : countdownTime // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        gameDuration: freezed == gameDuration
+            ? _value.gameDuration
+            : gameDuration // ignore: cast_nullable_to_non_nullable
+                  as int?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$UpdateConfigsImpl implements UpdateConfigs {
+  const _$UpdateConfigsImpl({this.countdownTime, this.gameDuration});
+
+  @override
+  final int? countdownTime;
+  @override
+  final int? gameDuration;
+
+  @override
+  String toString() {
+    return 'GameEvent.updateConfigs(countdownTime: $countdownTime, gameDuration: $gameDuration)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateConfigsImpl &&
+            (identical(other.countdownTime, countdownTime) ||
+                other.countdownTime == countdownTime) &&
+            (identical(other.gameDuration, gameDuration) ||
+                other.gameDuration == gameDuration));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, countdownTime, gameDuration);
+
+  /// Create a copy of GameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateConfigsImplCopyWith<_$UpdateConfigsImpl> get copyWith =>
+      __$$UpdateConfigsImplCopyWithImpl<_$UpdateConfigsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<String> players) savePlayers,
+    required TResult Function(int index, bool isSelected) toggleCategory,
+    required TResult Function() startPlaying,
+    required TResult Function(bool isCorrect) answerWord,
+    required TResult Function() resetGame,
+    required TResult Function() loadHighscores,
+    required TResult Function() saveCurrentScore,
+    required TResult Function(int? countdownTime, int? gameDuration)
+    updateConfigs,
+  }) {
+    return updateConfigs(countdownTime, gameDuration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<String> players)? savePlayers,
+    TResult? Function(int index, bool isSelected)? toggleCategory,
+    TResult? Function()? startPlaying,
+    TResult? Function(bool isCorrect)? answerWord,
+    TResult? Function()? resetGame,
+    TResult? Function()? loadHighscores,
+    TResult? Function()? saveCurrentScore,
+    TResult? Function(int? countdownTime, int? gameDuration)? updateConfigs,
+  }) {
+    return updateConfigs?.call(countdownTime, gameDuration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<String> players)? savePlayers,
+    TResult Function(int index, bool isSelected)? toggleCategory,
+    TResult Function()? startPlaying,
+    TResult Function(bool isCorrect)? answerWord,
+    TResult Function()? resetGame,
+    TResult Function()? loadHighscores,
+    TResult Function()? saveCurrentScore,
+    TResult Function(int? countdownTime, int? gameDuration)? updateConfigs,
+    required TResult orElse(),
+  }) {
+    if (updateConfigs != null) {
+      return updateConfigs(countdownTime, gameDuration);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavePlayers value) savePlayers,
+    required TResult Function(ToggleCategory value) toggleCategory,
+    required TResult Function(StartPlaying value) startPlaying,
+    required TResult Function(AnswerWord value) answerWord,
+    required TResult Function(ResetGame value) resetGame,
+    required TResult Function(LoadHighscores value) loadHighscores,
+    required TResult Function(SaveCurrentScore value) saveCurrentScore,
+    required TResult Function(UpdateConfigs value) updateConfigs,
+  }) {
+    return updateConfigs(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavePlayers value)? savePlayers,
+    TResult? Function(ToggleCategory value)? toggleCategory,
+    TResult? Function(StartPlaying value)? startPlaying,
+    TResult? Function(AnswerWord value)? answerWord,
+    TResult? Function(ResetGame value)? resetGame,
+    TResult? Function(LoadHighscores value)? loadHighscores,
+    TResult? Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult? Function(UpdateConfigs value)? updateConfigs,
+  }) {
+    return updateConfigs?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavePlayers value)? savePlayers,
+    TResult Function(ToggleCategory value)? toggleCategory,
+    TResult Function(StartPlaying value)? startPlaying,
+    TResult Function(AnswerWord value)? answerWord,
+    TResult Function(ResetGame value)? resetGame,
+    TResult Function(LoadHighscores value)? loadHighscores,
+    TResult Function(SaveCurrentScore value)? saveCurrentScore,
+    TResult Function(UpdateConfigs value)? updateConfigs,
+    required TResult orElse(),
+  }) {
+    if (updateConfigs != null) {
+      return updateConfigs(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateConfigs implements GameEvent {
+  const factory UpdateConfigs({
+    final int? countdownTime,
+    final int? gameDuration,
+  }) = _$UpdateConfigsImpl;
+
+  int? get countdownTime;
+  int? get gameDuration;
+
+  /// Create a copy of GameEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateConfigsImplCopyWith<_$UpdateConfigsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$GameState {
   List<String> get players => throw _privateConstructorUsedError;
   List<Category> get categories => throw _privateConstructorUsedError;
   List<String> get gameWords => throw _privateConstructorUsedError;
   int get currentWordIndex => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
-  List<String> get highscores => throw _privateConstructorUsedError;
+  List<String> get highscores =>
+      throw _privateConstructorUsedError; // New Configuration Fields
+  int get countdownTime =>
+      throw _privateConstructorUsedError; // Time before game starts
+  int get gameDuration => throw _privateConstructorUsedError;
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
@@ -1213,6 +1465,8 @@ abstract class $GameStateCopyWith<$Res> {
     int currentWordIndex,
     int score,
     List<String> highscores,
+    int countdownTime,
+    int gameDuration,
   });
 }
 
@@ -1237,6 +1491,8 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
     Object? currentWordIndex = null,
     Object? score = null,
     Object? highscores = null,
+    Object? countdownTime = null,
+    Object? gameDuration = null,
   }) {
     return _then(
       _value.copyWith(
@@ -1264,6 +1520,14 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
                 ? _value.highscores
                 : highscores // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            countdownTime: null == countdownTime
+                ? _value.countdownTime
+                : countdownTime // ignore: cast_nullable_to_non_nullable
+                      as int,
+            gameDuration: null == gameDuration
+                ? _value.gameDuration
+                : gameDuration // ignore: cast_nullable_to_non_nullable
+                      as int,
           )
           as $Val,
     );
@@ -1286,6 +1550,8 @@ abstract class _$$GameStateImplCopyWith<$Res>
     int currentWordIndex,
     int score,
     List<String> highscores,
+    int countdownTime,
+    int gameDuration,
   });
 }
 
@@ -1309,6 +1575,8 @@ class __$$GameStateImplCopyWithImpl<$Res>
     Object? currentWordIndex = null,
     Object? score = null,
     Object? highscores = null,
+    Object? countdownTime = null,
+    Object? gameDuration = null,
   }) {
     return _then(
       _$GameStateImpl(
@@ -1336,6 +1604,14 @@ class __$$GameStateImplCopyWithImpl<$Res>
             ? _value._highscores
             : highscores // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        countdownTime: null == countdownTime
+            ? _value.countdownTime
+            : countdownTime // ignore: cast_nullable_to_non_nullable
+                  as int,
+        gameDuration: null == gameDuration
+            ? _value.gameDuration
+            : gameDuration // ignore: cast_nullable_to_non_nullable
+                  as int,
       ),
     );
   }
@@ -1351,6 +1627,8 @@ class _$GameStateImpl implements _GameState {
     this.currentWordIndex = 0,
     this.score = 0,
     final List<String> highscores = const [],
+    this.countdownTime = 3,
+    this.gameDuration = 30,
   }) : _players = players,
        _categories = categories,
        _gameWords = gameWords,
@@ -1398,9 +1676,18 @@ class _$GameStateImpl implements _GameState {
     return EqualUnmodifiableListView(_highscores);
   }
 
+  // New Configuration Fields
+  @override
+  @JsonKey()
+  final int countdownTime;
+  // Time before game starts
+  @override
+  @JsonKey()
+  final int gameDuration;
+
   @override
   String toString() {
-    return 'GameState(players: $players, categories: $categories, gameWords: $gameWords, currentWordIndex: $currentWordIndex, score: $score, highscores: $highscores)';
+    return 'GameState(players: $players, categories: $categories, gameWords: $gameWords, currentWordIndex: $currentWordIndex, score: $score, highscores: $highscores, countdownTime: $countdownTime, gameDuration: $gameDuration)';
   }
 
   @override
@@ -1423,7 +1710,11 @@ class _$GameStateImpl implements _GameState {
             const DeepCollectionEquality().equals(
               other._highscores,
               _highscores,
-            ));
+            ) &&
+            (identical(other.countdownTime, countdownTime) ||
+                other.countdownTime == countdownTime) &&
+            (identical(other.gameDuration, gameDuration) ||
+                other.gameDuration == gameDuration));
   }
 
   @override
@@ -1435,6 +1726,8 @@ class _$GameStateImpl implements _GameState {
     currentWordIndex,
     score,
     const DeepCollectionEquality().hash(_highscores),
+    countdownTime,
+    gameDuration,
   );
 
   /// Create a copy of GameState
@@ -1454,6 +1747,8 @@ abstract class _GameState implements GameState {
     final int currentWordIndex,
     final int score,
     final List<String> highscores,
+    final int countdownTime,
+    final int gameDuration,
   }) = _$GameStateImpl;
 
   @override
@@ -1467,7 +1762,11 @@ abstract class _GameState implements GameState {
   @override
   int get score;
   @override
-  List<String> get highscores;
+  List<String> get highscores; // New Configuration Fields
+  @override
+  int get countdownTime; // Time before game starts
+  @override
+  int get gameDuration;
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
