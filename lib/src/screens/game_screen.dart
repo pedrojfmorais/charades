@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:vibration/vibration.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -111,11 +112,39 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _updateRemainingTime() {
+    final int oldSeconds = _secondsDisplay;
+
     setState(() {
       _millisecondsRemaining =
           _totalDurationMs - _stopwatch.elapsedMilliseconds;
       if (_millisecondsRemaining < 0) _millisecondsRemaining = 0;
     });
+
+    final int newSeconds = _secondsDisplay;
+
+    // Detect when a second has passed
+    if (newSeconds != oldSeconds) {
+      if (_isStarting) {
+        // Vibrate during the 3-2-1 countdown
+        if (newSeconds == 0) {
+          // Intense vibration for the final "0" (Game Start)
+          Vibration.vibrate(duration: 150);
+        } else {
+          Vibration.vibrate(duration: 50);
+        }
+      } else {
+        // Active game vibrations
+        if (newSeconds == 0) {
+          // Intense vibration for the final "0" (Game End)
+          Vibration.vibrate(duration: 500);
+        } else if (newSeconds <= 10) {
+          // Intensifying vibrations for the last 10 seconds
+          // Duration increases as seconds decrease: (11 - 1 = 10 * 25 = 250ms)
+          int intensityDuration = (11 - newSeconds) * 25;
+          Vibration.vibrate(duration: intensityDuration);
+        }
+      }
+    }
   }
 
   void _transitionToMainGame() {
@@ -131,6 +160,9 @@ class _GameScreenState extends State<GameScreen> {
 
   void _handleAnswer(bool isCorrect) {
     if (_isStarting) return;
+
+    // Vibrate on answer
+    Vibration.vibrate(duration: 100);
 
     setState(() => _hasReturnedToNeutral = false);
     context.read<GameBloc>().add(AnswerWord(isCorrect));
@@ -237,20 +269,17 @@ class _GameScreenState extends State<GameScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          state.gameWords[state.currentWordIndex].toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 80,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(blurRadius: 15, color: Colors.black54),
-                            ],
-                          ),
+                      const SizedBox(height: 8),
+                      Text(
+                        state.gameWords[state.currentWordIndex].toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 80,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(blurRadius: 15, color: Colors.black54),
+                          ],
                         ),
                       ),
                     ],
